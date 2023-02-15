@@ -21,8 +21,10 @@ struct News: Decodable, Identifiable {
     let title: String
     let description: String?
     var author: String?
+    let urlToImage: String?
     let publishedAt: String
     let content: String
+    let noticeURL: URL?
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -32,8 +34,10 @@ struct News: Decodable, Identifiable {
         publishedAt = try values.decode(String.self, forKey: .publishedAt)
         author = try values.decodeIfPresent(String.self, forKey: .author)
         description = try values.decodeIfPresent(String.self, forKey: .description)
+        urlToImage = try values.decodeIfPresent(String.self, forKey: .urlToImage)
         print("\n\n Author value: \(author ?? "Unknown") \n\n")
         id = try values.decode(String.self, forKey: .url)
+        noticeURL = URL(string: id)
     }
     
     enum CodingKeys: String, CodingKey {
@@ -44,6 +48,7 @@ struct News: Decodable, Identifiable {
         case publishedAt
         case author
         case description
+        case urlToImage
     }
     
 }
@@ -57,6 +62,8 @@ extension News {
         self.author = author
         self.source = Source(name: "Testing Source")
         self.description = "Description..."
+        self.urlToImage = "Image"
+        self.noticeURL = URL(string: "www.google.com")
     }
     
     static let testNews = News(

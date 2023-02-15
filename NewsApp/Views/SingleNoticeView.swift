@@ -9,14 +9,29 @@ import SwiftUI
 
 struct SingleNoticeView: View {
     var notice: News
+    @State private var showWebView = false
     
     var body: some View {
-        VStack {
-            Text(notice.title).font(.title).bold()
-            Text("URL: \(notice.id)").font(.subheadline).italic().padding()
-            Text("Source: \(notice.source.name)").font(.subheadline)
-            Text("Author: \(notice.author ?? "Unknown")").font(.subheadline).padding()
-            Text(notice.content).font(.headline)
+        ScrollView {
+            VStack {
+                Text(notice.title).font(.title).bold()
+                
+                Image(systemName: "newspaper.fill")
+                    .frame(width: 50, height: 50, alignment: .center)
+                
+                VStack(spacing: 16) {
+                    Button("Check the full notice!") {
+                        showWebView = true
+                    }.sheet(isPresented: $showWebView) {
+                        WebView(url: notice.id)
+                    }
+                }
+                .padding()
+                
+                Text("Source: \(notice.source.name)").font(.subheadline)
+                Text("Author: \(notice.author ?? "Unknown")").font(.subheadline).padding()
+                Text(notice.content).font(.headline)
+            }
         }
     }
 }
