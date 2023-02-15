@@ -20,9 +20,10 @@ struct NewsView: View {
                 VStack {
                     Spacer()
                     Text("Source: \(news.source.name)").font(.headline)
+                    Text("Author: \(news.author ?? "Unknown")").font(.headline)
                     Text("Published at: \(news.publishedAt)").font(.headline)
                     Spacer()
-                    Text(news.content).lineLimit(2)
+                    Text(news.description ?? "").lineLimit(2)
                 }
                 Spacer()
             }
