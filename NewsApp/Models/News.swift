@@ -35,7 +35,6 @@ struct News: Decodable, Identifiable {
         author = try values.decodeIfPresent(String.self, forKey: .author)
         description = try values.decodeIfPresent(String.self, forKey: .description)
         urlToImage = try values.decodeIfPresent(String.self, forKey: .urlToImage)
-        print("\n\n Author value: \(author ?? "Unknown") \n\n")
         id = try values.decode(String.self, forKey: .url)
         noticeURL = URL(string: id)
     }

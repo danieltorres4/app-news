@@ -16,8 +16,23 @@ struct SingleNoticeView: View {
             VStack {
                 Text(notice.title).font(.title).bold()
                 
-                Image(systemName: "newspaper.fill")
-                    .frame(width: 50, height: 50, alignment: .center)
+                if notice.urlToImage != nil {
+                    AsyncImage(url: URL(string: notice.urlToImage!)) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(20)
+                            .padding()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                } else {
+                    Image(systemName: "newspaper.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .cornerRadius(20)
+                        .padding()
+                }
                 
                 VStack(spacing: 16) {
                     Button("Check the full notice!") {
