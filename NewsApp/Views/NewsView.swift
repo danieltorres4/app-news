@@ -48,7 +48,7 @@ struct NewsView: View {
                 }
                 Spacer()
             }
-            .navigationTitle("All News")
+            .navigationTitle("Latest News")
         }
     }
 }

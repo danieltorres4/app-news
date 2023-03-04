@@ -47,7 +47,7 @@ struct TechNewsView: View {
                 }
                 Spacer()
             }
-            .navigationTitle("Apple News")
+            .navigationTitle("Latest Apple News")
         }
     }
 }
